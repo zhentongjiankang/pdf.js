@@ -149,7 +149,7 @@ See https://github.com/adobe-type-tools/cmap-resources
           </div>
         </div>  <!-- secondaryToolbar -->
 
-        <div class="toolbar">
+        <div class="toolbar" style="display: none;">
           <div id="toolbarContainer">
             <div id="toolbarViewer">
               <div id="toolbarViewerLeft">
@@ -212,10 +212,10 @@ See https://github.com/adobe-type-tools/cmap-resources
                   </div>
                   <span id="scaleSelectContainer" class="dropdownToolbarButton">
                      <select id="scaleSelect" title="Zoom" tabindex="23" data-l10n-id="zoom">
-                      <option id="pageAutoOption" title="" value="auto" selected="selected" data-l10n-id="page_scale_auto">Automatic Zoom</option>
+                      <option id="pageAutoOption" title="" value="auto"data-l10n-id="page_scale_auto">Automatic Zoom</option>
                       <option id="pageActualOption" title="" value="page-actual" data-l10n-id="page_scale_actual">Actual Size</option>
                       <option id="pageFitOption" title="" value="page-fit" data-l10n-id="page_scale_fit">Fit Page</option>
-                      <option id="pageWidthOption" title="" value="page-width" data-l10n-id="page_scale_width">Full Width</option>
+                      <option id="pageWidthOption" title="" value="page-width" selected="selected" data-l10n-id="page_scale_width">Full Width</option>
                       <option id="customScaleOption" title="" value="custom"></option>
                       <option title="" value="0.5" data-l10n-id="page_scale_percent" data-l10n-args='{ "scale": 50 }'>50%</option>
                       <option title="" value="0.75" data-l10n-id="page_scale_percent" data-l10n-args='{ "scale": 75 }'>75%</option>
@@ -418,7 +418,58 @@ See https://github.com/adobe-type-tools/cmap-resources
     </div>
   </div>
 </div>
-
-  </body>
+<script type="text/javascript">
+  setTimeout(function(){
+    var getElementsByClassName = function (searchClass, node,tag) {
+      if(document.getElementsByClassName){
+        var nodes =  (node || document).getElementsByClassName(searchClass),result = [];
+        for(var i=0 ;node = nodes[i++];){
+            if(tag !== "*" && node.tagName === tag.toUpperCase()){
+              result.push(node)
+            }
+        }
+        return result
+      }
+      else{
+        node = node || document;
+        tag = tag || "*";
+        var classes = searchClass.split(" "),
+            elements = (tag === "*" && node.all)? node.all : node.getElementsByTagName(tag),
+            patterns = [],
+            current,
+            match;
+        var i = classes.length;
+        while(--i >= 0){
+            patterns.push(new RegExp("(^|\\s)" + classes[i] + "(\\s|$)"));
+        }
+        var j = elements.length;
+        while(--j >= 0){
+            current = elements[j];
+            match = false;
+            for(var k=0, kl=patterns.length; k<kl; k++){
+              match = patterns[k].test(current.className);
+              if (!match)  break;
+            }
+            if (match)  result.push(current);
+        }
+        return result;
+      }
+    };
+    var html_element = document.getElementsByTagName('html')[0];
+    var viewer_node = getElementsByClassName('pdfViewer', document, 'div')[0];
+    var pdf_pages = getElementsByClassName('page', viewer_node, 'div');
+    var pdf_height_sum = 0;
+    var pdf_page_length = pdf_pages.length;
+  
+    var onePageHeight = document.getElementById("pageContainer1").offsetHeight;
+    pdf_height_sum = onePageHeight * pdf_page_length;
+    //alert(pdf_height_sum);
+    var speedHeight = 12*pdf_page_length;
+    var pdfHeight = pdf_height_sum + speedHeight;
+    viewer_node.style.height = pdfHeight + 'px';
+    html_element.setAttribute('heightsum', pdfHeight);
+  },1500);
+</script>
+</body>
 </html>
 

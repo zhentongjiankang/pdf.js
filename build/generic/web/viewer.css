@@ -152,15 +152,16 @@
 
 .pdfViewer .page {
   direction: ltr;
-  width: 816px;
+  min-width: 1210px;
   height: 1056px;
-  margin: 1px auto -8px auto;
+  margin: 10px auto;
   position: relative;
   overflow: visible;
-  border: 9px solid transparent;
+  border: 1px solid #ccc;
   background-clip: content-box;
   border-image: url(images/shadow.png) 9 9 repeat;
   background-color: white;
+  box-shadow: 2px 2px 5px #888;
 }
 
 .pdfViewer.removePageBorders .page {
@@ -218,8 +219,7 @@ html {
 body {
   height: 100%;
   width: 100%;
-  background-color: #404040;
-  background-image: url(images/texture.png);
+  background-color: white;
 }
 
 body,
@@ -431,10 +431,10 @@ html[dir='rtl'] #sidebarContent {
 }
 
 #viewerContainer {
-  overflow: auto;
+  overflow: visible;
   -webkit-overflow-scrolling: touch;
   position: absolute;
-  top: 32px;
+  top: 0;
   right: 0;
   bottom: 0;
   left: 0;
