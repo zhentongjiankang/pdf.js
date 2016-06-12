@@ -4531,6 +4531,7 @@ var PDFPageView = (function PDFPageViewClosure() {
 
       var pdfBox = document.getElementById('pdf-box');
       pdfBox.style.border = "0";
+      pdfBox.style.boxShadow = "2px 2px 2px #fff";
     },
 
     update: function PDFPageView_update(scale, rotation) {
