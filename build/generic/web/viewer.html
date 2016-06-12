@@ -48,6 +48,7 @@ See https://github.com/adobe-type-tools/cmap-resources
   </head>
 
   <body tabindex="1" class="loadingInProgress">
+  <div id="pdf-box" class="pdf-loading-box">
     <div id="outerContainer">
 
       <div id="sidebarContainer">
@@ -418,6 +419,7 @@ See https://github.com/adobe-type-tools/cmap-resources
     </div>
   </div>
 </div>
+</div>
 <script type="text/javascript">
   setTimeout(function(){
     var getElementsByClassName = function (searchClass, node,tag) {
@@ -461,9 +463,8 @@ See https://github.com/adobe-type-tools/cmap-resources
     var pdf_height_sum = 0;
     var pdf_page_length = pdf_pages.length;
   
-    var onePageHeight = document.getElementById("pageContainer1").offsetHeight;
+    var onePageHeight = document.getElementById("pageContainer1").offsetHeight + 10;
     pdf_height_sum = onePageHeight * pdf_page_length;
-    //alert(pdf_height_sum);
     var speedHeight = 12*pdf_page_length;
     var pdfHeight = pdf_height_sum + speedHeight;
     viewer_node.style.height = pdfHeight + 'px';

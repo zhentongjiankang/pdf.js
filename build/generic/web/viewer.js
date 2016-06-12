@@ -4528,6 +4528,9 @@ var PDFPageView = (function PDFPageViewClosure() {
       this.loadingIconDiv = document.createElement('div');
       this.loadingIconDiv.className = 'loadingIcon';
       div.appendChild(this.loadingIconDiv);
+
+      var pdfBox = document.getElementById('pdf-box');
+      pdfBox.style.border = "0";
     },
 
     update: function PDFPageView_update(scale, rotation) {
